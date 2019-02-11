@@ -1,0 +1,5 @@
+#!/bin/bash
+
+ZIPNAME=$1
+FOLDERNAME="${ZIPNAME//.zip/}"
+unzip -d $FOLDERNAME $ZIPNAME

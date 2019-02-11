@@ -1,0 +1,57 @@
+#!/bin/bash
+
+source $GBASH_ROOT/gbash.sh || exit 1
+
+DEFINE_bool debug --empty_false false "Use Debug instead of Release"
+DEFINE_string profile "1" "Profile directory to use"
+DEFINE_array vm --type=string --delim=, "" "Extra vmodules"
+gbash::init_google "$@"
+
+cd $HOME/chrome/src
+
+TARGET_DIR="Release"
+if (( $FLAGS_debug )); then
+  TARGET_DIR="Debug"
+fi
+
+VMODULES=(
+)
+
+VMODULES_STRING=""
+for i in ${FLAGS_vm[@]}; do
+  VMODULES_STRING="${VMODULES_STRING}$i=3,"
+done
+for i in ${VMODULES[@]}; do
+  VMODULES_STRING="${VMODULES_STRING}$i=3,"
+done
+
+function auto_vmodules() {
+  for l in `git diff --name-only origin/master | egrep "\.(cc|h)$"`; do
+    echo `basename ${l%.*}`
+  done | sort -u
+}
+for i in `auto_vmodules`; do
+  VMODULES_STRING="${VMODULES_STRING}$i=3,"
+done
+
+
+function ene() {
+  echo "$@";
+  exec "$@";
+}
+
+  #--disable-gpu-vsync \
+  #--force-enable-metrics-reporting \
+  # --use-skia-renderer \
+  # --enable-gpu-rasterization \
+  # --disable-gpu-driver-bug-workarounds \
+  # --force-gpu-rasterization \
+  # --enable-native-gpu-memory-buffers \
+
+ene out/${TARGET_DIR}/chrome \
+  --user-data-dir=../profiles/${FLAGS_profile}/ \
+  --enable-logging=stderr \
+  --enable-precise-memory-info \
+  --enable-experimental-canvas-features \
+  --vmodule="${VMODULES_STRING}" \
+  ${GBASH_ARGV[@]}

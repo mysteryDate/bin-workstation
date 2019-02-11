@@ -1,0 +1,2 @@
+#!/bin/bash
+play -nq -t alsa synth 0.15 tri F#4 tri D4 tri B3 delay 0 0.15 0.3 remix - vol 1 reverb

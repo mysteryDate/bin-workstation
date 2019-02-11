@@ -1,0 +1,6 @@
+#!/bin/bash
+
+BRANCHNAME=$1
+git checkout origin/master
+git checkout -b $BRANCHNAME
+git branch --set-upstream-to=origin/master

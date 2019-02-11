@@ -1,0 +1,12 @@
+#!/bin/bash
+
+cd ~/chrome/src
+if git rebase-update; then
+  if gclient sync; then
+    bchrome
+  else
+    sadchime
+  fi
+else
+  sadchime
+fi

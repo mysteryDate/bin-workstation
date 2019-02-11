@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if autoninja -C ~/chrome/src/out/Release; then
+  chime
+  rchrome $1
+else
+  sadchime
+fi

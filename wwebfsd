@@ -1,0 +1,11 @@
+#!/bin/bash
+
+IFS=$'\012'
+
+for l in `pgrep '\bwebfsd'`; do 
+	PID=`echo "$l" | cut -d' ' -f 1`
+	CMDLINE=`cat /proc/$PID/cmdline | tr '\0' ' '`
+	PCWD=`pwdx $PID | cut -d: -f 2`
+	PCWD=`printf "%-40s" "$PCWD"`
+	echo -e "$PID $PCWD $CMDLINE"
+done
