@@ -1,4 +1,8 @@
 #!/bin/bash
 set -e
-gnome-screenshot -a -f /tmp/shot.png
-xclip -selection clipboard -t image/png -i /tmp/shot.png
+DATE=$(date)
+DATE=${DATE// /_}
+FILEPATH="$HOME/Desktop/Screenshot_$DATE.png"
+echo $FILEPATH
+gnome-screenshot -a -f $FILEPATH
+xclip -selection clipboard -t image/png -i $FILEPATH
