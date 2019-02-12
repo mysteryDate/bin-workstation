@@ -1,0 +1,4 @@
+#!/bin/bash
+set -e
+gnome-screenshot -a -f /tmp/shot.png
+xclip -selection clipboard -t image/png -i /tmp/shot.png

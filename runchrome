@@ -46,6 +46,5 @@ ene out/${TARGET_DIR}/chrome \
   --enable-experimental-canvas-features \
   --enable-precise-memory-info \
   --js-flags="--expose-gc" \
-  --force-device-scale-factor=1.25 \
   --vmodule="${VMODULES_STRING}" \
   ${GBASH_ARGV[@]}
