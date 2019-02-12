@@ -2,17 +2,14 @@
 
 source $GBASH_ROOT/gbash.sh || exit 1
 
-DEFINE_bool debug --empty_false false "Use Debug instead of Release"
+DEFINE_string t "Release" "Which output directory to use"
 DEFINE_string profile "1" "Profile directory to use"
 DEFINE_array vm --type=string --delim=, "" "Extra vmodules"
 gbash::init_google "$@"
 
 cd $HOME/chrome/src
 
-TARGET_DIR="Release"
-if (( $FLAGS_debug )); then
-  TARGET_DIR="Debug"
-fi
+TARGET_DIR=${FLAGS_t}
 
 VMODULES=(
 )
@@ -40,18 +37,14 @@ function ene() {
   exec "$@";
 }
 
-  #--disable-gpu-vsync \
-  #--force-enable-metrics-reporting \
-  # --use-skia-renderer \
-  # --enable-gpu-rasterization \
-  # --disable-gpu-driver-bug-workarounds \
-  # --force-gpu-rasterization \
-  # --enable-native-gpu-memory-buffers \
+#--disable-gpu-vsync \
 
 ene out/${TARGET_DIR}/chrome \
-  --user-data-dir=../profiles/${FLAGS_profile}/ \
   --enable-logging=stderr \
-  --enable-precise-memory-info \
+  --user-data-dir=../profiles/${FLAGS_profile}/ \
   --enable-experimental-canvas-features \
+  --enable-precise-memory-info \
+  --js-flags="--expose-gc" \
+  --force-device-scale-factor=1.25 \
   --vmodule="${VMODULES_STRING}" \
   ${GBASH_ARGV[@]}
