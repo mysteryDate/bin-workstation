@@ -22,8 +22,9 @@ for i in ${VMODULES[@]}; do
   VMODULES_STRING="${VMODULES_STRING}$i=3,"
 done
 
+COMMON_ANCESTOR=$(git merge-base HEAD origin/master)
 function auto_vmodules() {
-  for l in `git diff --name-only origin/master | egrep "\.(cc|h)$"`; do
+  for l in `git diff --name-only $COMMON_ANCESTOR | egrep "\.(cc|h)$"`; do
     echo `basename ${l%.*}`
   done | sort -u
 }
