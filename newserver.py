@@ -15,6 +15,8 @@ for pid in PIDs:
   proc = proc.replace("\x00", " ")
   port_number = re.findall(r"\d{3,8}", proc)[0]
   occupied_ports.append(int(port_number))
+if len(occupied_ports) == 0:
+  occupied_ports.append(STARTING_PORT - 1)
 
 occupied_ports.sort()
 new_port = str(occupied_ports[-1] + 1)
