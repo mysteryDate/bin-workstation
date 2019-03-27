@@ -2,7 +2,7 @@
 
 cd ~/chrome/src
 if git rebase-update; then
-  if gclient sync; then
+  if gclient sync --jobs=256; then
     bchrome
   else
     sadchime

@@ -38,7 +38,12 @@ function ene() {
   exec "$@";
 }
 
-#--disable-gpu-vsync \
+  # --disable-gpu-vsync \
+  # --force-color-profile=srgb \
+  # --force-color-profile=srgb \
+  # --ensure-forced-color-profile \
+  # --enable-features=AlwaysAccelerateCanvas \
+  # --enable-experimental-web-platform-features \
 
 ene out/${TARGET_DIR}/chrome \
   --enable-logging=stderr \

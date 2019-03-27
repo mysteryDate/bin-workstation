@@ -19,8 +19,10 @@ if len(occupied_ports) == 0:
   occupied_ports.append(STARTING_PORT - 1)
 
 occupied_ports.sort()
-new_port = str(occupied_ports[-1] + 1)
-subprocess.run(["webfsd", "-p", new_port, "-e0"])
+new_port = STARTING_PORT
+while new_port in occupied_ports:
+  new_port += 1
+subprocess.run(["webfsd", "-p", str(new_port), "-e0"])
 
 current_directory = os.getcwd()
 output_string = "Started new server at {d} using port {p}".format(d=current_directory, p=new_port)
