@@ -42,6 +42,7 @@ function ene() {
   # --force-color-profile=srgb \
   # --force-color-profile=srgb \
   # --ensure-forced-color-profile \
+  # --use-gl=angle --use-angle=gl --use-cmd-decoder=passthrough \
   # --enable-features=AlwaysAccelerateCanvas \
   # --enable-experimental-web-platform-features \
 
