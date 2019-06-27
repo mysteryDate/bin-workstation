@@ -1,8 +1,13 @@
 #!/bin/bash
 
-if autoninja -C ~/chrome/src/out/Release; then
+source $GBASH_ROOT/gbash.sh || exit 1
+
+DEFINE_string t "Release" "Which output directory to use"
+gbash::init_google "$@"
+
+if autoninja -C ~/chrome/src/out/${FLAGS_t}; then
   chime
-  rchrome $1
+  rchrome -t=${FLAGS_t} ${GBASH_ARGV[@]}
 else
   sadchime
 fi
