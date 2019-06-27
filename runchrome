@@ -45,6 +45,7 @@ function ene() {
   # --use-gl=angle --use-angle=gl --use-cmd-decoder=passthrough \
   # --enable-features=AlwaysAccelerateCanvas \
   # --enable-experimental-web-platform-features \
+  # --disable-accelerated-2d-canvas \
 
 ene out/${TARGET_DIR}/chrome \
   --enable-logging=stderr \
