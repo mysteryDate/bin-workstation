@@ -1,0 +1,10 @@
+#!/bin/bash
+WINDOW_GEOMETRY=$(xdotool getactivewindow | xargs xdotool getwindowgeometry)
+NUMBERS=($(echo ${WINDOW_GEOMETRY} | grep -oP "\d+"))
+echo ${WINDOW_GEOMETRY}
+echo ${NUMBERS}
+
+X=$(expr ${NUMBERS[1]} + ${NUMBERS[4]} / 2)
+emoji-keyboard -s
+wmctrl -r "Search emoji" -e 0,$X,${NUMBERS[2]},-1,-1
+wmctrl -R "Search emoji"

@@ -40,6 +40,7 @@ function ene() {
 
   # --disable-gpu-vsync \
   # --force-color-profile=srgb \
+  # --force-device-scale-factor=0.5 \
   # --ensure-forced-color-profile \
   # --use-gl=angle --use-angle=gl --use-cmd-decoder=passthrough \
   # --enable-features=AlwaysAccelerateCanvas \

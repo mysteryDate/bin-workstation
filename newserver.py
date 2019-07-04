@@ -1,3 +1,4 @@
+#!usr/bin/env python3
 import os, re, subprocess
 
 STARTING_PORT = 5000
