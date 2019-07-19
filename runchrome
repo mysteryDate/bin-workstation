@@ -43,7 +43,7 @@ function ene() {
   # --force-device-scale-factor=0.5 \
   # --ensure-forced-color-profile \
   # --use-gl=angle --use-angle=gl --use-cmd-decoder=passthrough \
-  # --enable-features=AlwaysAccelerateCanvas \
+  # --enable-accelerated-2d-canvas \
   # --enable-experimental-web-platform-features \
   # --disable-accelerated-2d-canvas \
 
