@@ -3,7 +3,7 @@
 source $GBASH_ROOT/gbash.sh || exit 1
 
 DEFINE_string t "Release" "Which output directory to use"
-DEFINE_string profile "1" "Profile directory to use"
+DEFINE_string profile "0" "Profile directory to use"
 DEFINE_array vm --type=string --delim=, "" "Extra vmodules"
 gbash::init_google "$@"
 
@@ -50,6 +50,7 @@ function ene() {
 ene out/${TARGET_DIR}/chrome \
   --enable-logging=stderr \
   --user-data-dir=../profiles/${FLAGS_profile}/ \
+  --force-gpu-rasterization \
   --enable-experimental-canvas-features \
   --enable-precise-memory-info \
   --js-flags="--expose-gc" \
