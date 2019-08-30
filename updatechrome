@@ -3,7 +3,10 @@
 cd ~/chrome/src
 if git rebase-update; then
   if gclient sync --jobs=256; then
-    bchrome
+    if autoninja -C ~/chrome/src/out/Release
+      chime
+    else
+      sadchime
   else
     sadchime
   fi
