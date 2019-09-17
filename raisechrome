@@ -1,21 +1,9 @@
 #!/bin/bash
-# PREVIOUS_WINDOW_ID=$(cat $HOME/bin/previous-window-id)
-# ACTIVE_WINDOW_NAME=$(xdotool getactivewindow | xargs xdotool getwindowname)
-
-# if echo $ACTIVE_WINDOW_NAME | grep "Google Chrome"; then
-#   echo $ACTIVE_WINDOW_NAME > ~/Desktop/butttz
-#   xdotool windowactivate $PREVIOUS_WINDOW_ID
-# else
-#   PREVIOUS_WINDOW_ID=$(xdotool getactivewindow)
-#   echo $PREVIOUS_WINDOW_ID > $HOME/bin/previous-window-id
-#   CHROME_WINDOWS=$(xdotool search --onlyvisible --class chrome)
-#   for WINDOW_NUM in $CHROME_WINDOWS; do
-#     xdotool windowactivate $WINDOW_NUM
-#   done
-# fi
-
-
-CHROME_WINDOWS=$(xdotool search --onlyvisible --class chrome)
-for WINDOW_NUM in $CHROME_WINDOWS; do
-  xdotool windowactivate $WINDOW_NUM
+PROGRAM="chrome"
+ACTIVE_WINDOW=$(xdotool getactivewindow)
+PROGRAM_WINDOWS=$(xdotool search --onlyvisible --class $PROGRAM)
+for WINDOW_NUM in $PROGRAM_WINDOWS; do
+  if !(( $WINDOW_NUM == $ACTIVE_WINDOW )); then
+    xdotool windowactivate $WINDOW_NUM
+  fi
 done
