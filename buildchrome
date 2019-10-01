@@ -2,12 +2,15 @@
 
 source $GBASH_ROOT/gbash.sh || exit 1
 
+DEFINE_bool r "false" "Should chrome run after building"
 DEFINE_string t "Release" "Which output directory to use"
 gbash::init_google "$@"
 
 if autoninja -C ~/chrome/src/out/${FLAGS_t}; then
   chime
-  rchrome -t=${FLAGS_t} ${GBASH_ARGV[@]}
+  if (( FLAGS_r )); then
+    rchrome -t=${FLAGS_t} ${GBASH_ARGV[@]}
+  fi
 else
   sadchime
 fi
