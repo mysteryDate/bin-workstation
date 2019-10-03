@@ -1,0 +1,12 @@
+#!/bin/bash
+for l in `pgrep '\bwebfsd'`; do
+  PID=`echo "$l" | cut -d' ' -f 1`
+  CMDLINE=`cat /proc/$PID/cmdline | tr '\0' ' '`
+  PCWD=`pwdx $PID | cut -d: -f 2`
+  PCWD=`printf "%-40s" "$PCWD"`
+  read -a CMD_WORDS <<< "$CMDLINE"
+  if (($1==${CMD_WORDS[2]})); then
+    echo "killing ${PCWD}"
+    kill $PID
+  fi
+done
