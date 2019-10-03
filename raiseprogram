@@ -1,0 +1,25 @@
+#!/bin/bash
+# PREVIOUS_WINDOW_ID=$(cat $HOME/bin/previous-window-id)
+# ACTIVE_WINDOW_NAME=$(xdotool getactivewindow | xargs xdotool getwindowname)
+
+# if echo $ACTIVE_WINDOW_NAME | grep "Sublime Text"; then
+#   xdotool windowactivate $PREVIOUS_WINDOW_ID
+# else
+#   PREVIOUS_WINDOW_ID=$(xdotool getactivewindow)
+#   echo $PREVIOUS_WINDOW_ID > $HOME/bin/previous-window-id
+#   SUBLIME_WINDOWS=$(xdotool search --onlyvisible --class sublime)
+#   for WINDOW_NUM in $SUBLIME_WINDOWS; do
+#     xdotool windowactivate $WINDOW_NUM
+#   done
+# fi
+source $GBASH_ROOT/gbash.sh || exit 1
+gbash::init_google "$@"
+
+PROGRAM=${GBASH_ARGV[0]}
+ACTIVE_WINDOW=$(xdotool getactivewindow)
+PROGRAM_WINDOWS=$(xdotool search --onlyvisible --class $PROGRAM)
+for WINDOW_NUM in $PROGRAM_WINDOWS; do
+  if !(( $WINDOW_NUM == $ACTIVE_WINDOW )); then
+    xdotool windowactivate $WINDOW_NUM
+  fi
+done

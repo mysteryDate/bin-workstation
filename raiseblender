@@ -1,0 +1,9 @@
+#!/bin/bash
+PROGRAM="blender"
+ACTIVE_WINDOW=$(xdotool getactivewindow)
+PROGRAM_WINDOWS=$(xdotool search --onlyvisible --class $PROGRAM)
+for WINDOW_NUM in $PROGRAM_WINDOWS; do
+  if !(( $WINDOW_NUM == $ACTIVE_WINDOW )); then
+    xdotool windowactivate $WINDOW_NUM
+  fi
+done

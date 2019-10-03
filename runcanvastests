@@ -1,0 +1,15 @@
+#!/bin/bash
+declare -a TEST_FOLDERS=(
+    http/tests/canvas
+    svg/canvas
+    external/wpt/offscreen-canvas
+    external/wpt/2dcontext
+    virtual/gpu/fast/canvas
+    fast/canvas
+  )
+
+cd ~/chrome/src
+for i in "${TEST_FOLDERS[@]}"; do
+  third_party/blink/tools/run_web_tests.py $i -q --no-show-results
+  printf "^ $i\n------------------------------------\n\n"
+done
