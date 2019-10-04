@@ -2,10 +2,13 @@
 declare -a TEST_FOLDERS=(
     http/tests/canvas
     svg/canvas
+    fast/canvas
     external/wpt/offscreen-canvas
     external/wpt/2dcontext
     virtual/gpu/fast/canvas
-    fast/canvas
+    virtual/disable-deferred-rendering/fast/canvas
+    virtual/threaded/fast/idleToBlob
+    virtual/threaded/external/wpt/offscreen-canvas
   )
 
 cd ~/chrome/src
@@ -13,3 +16,12 @@ for i in "${TEST_FOLDERS[@]}"; do
   third_party/blink/tools/run_web_tests.py $i -q --no-show-results
   printf "^ $i\n------------------------------------\n\n"
 done
+
+printf "---------- running webgl_conformance tests --------\n"
+content/test/gpu/run_gpu_integration_test.py webgl_conformance --test-filter *anvas*
+printf "^ $i\n------------------------------------\n\n"
+
+# There's an issue with the pixel tests, so skip em for now
+# printf "---------- running pixel tests --------\n"
+# content/test/gpu/run_gpu_integration_test.py pixel --test-filter *anvas*
+# printf "^ $i\n------------------------------------\n\n"

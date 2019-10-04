@@ -12,8 +12,11 @@ def get_servers():
   result = []
   for x in PIDs:
     p = command_to_string(["cat", "/proc/{}/cmdline".format(x)])
-    p = p.split("-p\x00")[1].split("\x00")[0]
     f = command_to_string(["pwdx", "{}".format(x)])
+    if (len(p.split("-p\x00")) < 2):
+      print(x, p, f)
+      continue
+    p = p.split("-p\x00")[1].split("\x00")[0]
     f = f.split("aaronhk/")[1].rstrip("\n")
     f = f.replace("chrome/src/third_party/blink", "BLINK")
     f = f.replace("chrome/src/third_party", "THIRD_PARTY")
