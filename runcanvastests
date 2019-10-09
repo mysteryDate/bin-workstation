@@ -1,4 +1,4 @@
-#!/bin/bash
+# !/bin/bash
 declare -a TEST_FOLDERS=(
     http/tests/canvas
     svg/canvas
@@ -17,14 +17,12 @@ for i in "${TEST_FOLDERS[@]}"; do
   printf "^ $i\n------------------------------------\n\n"
 done
 
-printf "---------- running webgl_conformance tests --------\n"
+printf " ---------- running webgl_conformance tests --------\n"
 content/test/gpu/run_gpu_integration_test.py webgl_conformance --test-filter *anvas*
 printf "^ $i\n------------------------------------\n\n"
 
-# There's an issue with the pixel tests, so skip em for now
-# printf "---------- running pixel tests --------\n"
-# xvfb-run -s "-screen 0 1024x768x24" \
-#   testing/scripts/run_gpu_integration_test_as_googletest.py \
-#   --isolated-script-test-output=../../Desktop/pixeltest-output.json \
-#   content/test/gpu/run_gpu_integration_test.py pixel --test-filter *anvas*
-# printf "^ $i\n------------------------------------\n\n"
+printf " ---------- running pixel tests --------\n"
+xvfb-run -s "-screen 0 1024x768x24" \
+  content/test/gpu/run_gpu_integration_test.py pixel --local-run \
+  --passthrough --no-skia-gold-failure --test-filter *anvas*
+printf "^ $i\n------------------------------------\n\n"

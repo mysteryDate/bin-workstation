@@ -2,14 +2,14 @@
 
 source $GBASH_ROOT/gbash.sh || exit 1
 
-DEFINE_string t "Release" "Which output directory to use"
+DEFINE_string d "Release" "Which output directory to use"
 DEFINE_string profile "0" "Profile directory to use"
 DEFINE_array vm --type=string --delim=, "" "Extra vmodules"
 gbash::init_google "$@"
 
 cd $HOME/chrome/src
 
-TARGET_DIR=${FLAGS_t}
+TARGET_DIR=${FLAGS_d}
 
 VMODULES=(
 )
