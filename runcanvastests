@@ -1,10 +1,19 @@
 # !/bin/bash
+
+source $GBASH_ROOT/gbash.sh || exit 1
+
+DEFINE_bool a "false" "Run all tests"
+DEFINE_bool v "false" "Run virtual tests"
+
 declare -a TEST_FOLDERS=(
     http/tests/canvas
     svg/canvas
     fast/canvas
     external/wpt/offscreen-canvas
     external/wpt/2dcontext
+  )
+
+declare -a VIRTUAL_TEST_FOLDERS=(
     virtual/gpu/fast/canvas
     virtual/disable-deferred-rendering/fast/canvas
     virtual/threaded/fast/idleToBlob
@@ -17,12 +26,25 @@ for i in "${TEST_FOLDERS[@]}"; do
   printf "^ $i\n------------------------------------\n\n"
 done
 
+if (( FLAGS_v )); then
+  for i in "${VIRTUAL_TEST_FOLDERS[@]}"; do
+    third_party/blink/tools/run_web_tests.py $i -q --no-show-results
+    printf "^ $i\n------------------------------------\n\n"
+  done
+fi
+
 printf " ---------- running webgl_conformance tests --------\n"
 content/test/gpu/run_gpu_integration_test.py webgl_conformance --test-filter *anvas*
 printf "^ $i\n------------------------------------\n\n"
 
-printf " ---------- running pixel tests --------\n"
-xvfb-run -s "-screen 0 1024x768x24" \
-  content/test/gpu/run_gpu_integration_test.py pixel --local-run \
-  --passthrough --no-skia-gold-failure --test-filter *anvas*
-printf "^ $i\n------------------------------------\n\n"
+# These are verbose, so don't always run em
+if (( FLAGS_a )); then
+  printf " ---------- running unit tests --------\n"
+  out/Release/blink_unittests --gtest_filter=*anvas*
+  printf "^ $i\n------------------------------------\n\n"
+  printf " ---------- running pixel tests --------\n"
+  xvfb-run -s "-screen 0 1024x768x24" \
+    content/test/gpu/run_gpu_integration_test.py pixel --local-run \
+    --passthrough --no-skia-gold-failure --test-filter *anvas*
+  printf "^ $i\n------------------------------------\n\n"
+fi
