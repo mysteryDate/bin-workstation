@@ -23,5 +23,8 @@ printf "^ $i\n------------------------------------\n\n"
 
 # There's an issue with the pixel tests, so skip em for now
 # printf "---------- running pixel tests --------\n"
-# content/test/gpu/run_gpu_integration_test.py pixel --test-filter *anvas*
+# xvfb-run -s "-screen 0 1024x768x24" \
+#   testing/scripts/run_gpu_integration_test_as_googletest.py \
+#   --isolated-script-test-output=../../Desktop/pixeltest-output.json \
+#   content/test/gpu/run_gpu_integration_test.py pixel --test-filter *anvas*
 # printf "^ $i\n------------------------------------\n\n"
