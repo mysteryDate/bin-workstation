@@ -1,0 +1,9 @@
+#!/bin/bash
+
+bluetoothctl disconnect
+if bluetoothctl connect CC:98:8B:B1:AC:64; then
+  sleep 3s
+  setxkbmap -option caps:escape
+  xmodmap ~/.Xmodmap
+  chime && chime
+fi

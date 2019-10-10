@@ -48,10 +48,10 @@ function ene() {
   # --disable-accelerated-2d-canvas \
   # --use-gl=swiftshader \
   # --disable-features=CanvasAlwaysDeferral \
+  # --user-data-dir=../profiles/${FLAGS_profile}/ \
 
 ene out/${TARGET_DIR}/chrome \
   --enable-logging=stderr \
-  --user-data-dir=../profiles/${FLAGS_profile}/ \
   --force-gpu-rasterization \
   --enable-experimental-canvas-features \
   --enable-precise-memory-info \

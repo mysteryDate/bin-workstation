@@ -1,5 +1,4 @@
-# !/bin/bash
-
+#!/bin/bash
 source $GBASH_ROOT/gbash.sh || exit 1
 
 DEFINE_bool a "false" "Run all tests"
@@ -44,6 +43,8 @@ if (( FLAGS_a )); then
   printf "^ $i\n------------------------------------\n\n"
   printf " ---------- running pixel tests --------\n"
   xvfb-run -s "-screen 0 1024x768x24" \
+    testing/scripts/run_gpu_integration_test_as_googletest.py \
+    --isolated-script-test-output=${HOME}/Desktop/pixel-test-output.json \
     content/test/gpu/run_gpu_integration_test.py pixel --local-run \
     --passthrough --no-skia-gold-failure --test-filter *anvas*
   printf "^ $i\n------------------------------------\n\n"

@@ -14,7 +14,7 @@ fi
 if $cmd; then
   chime
   if (( FLAGS_r )); then
-    rchrome -t=${FLAGS_t} ${GBASH_ARGV[@]}
+    rchrome -d=${FLAGS_d} ${GBASH_ARGV[@]}
   fi
 else
   sadchime

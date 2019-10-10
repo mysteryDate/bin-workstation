@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Already in french
+if setxkbmap -query | grep fr > /dev/null; then
+  setxkbmap us,ca -option caps:escape && xmodmap ~/.Xmodmap
+else
+  setxkbmap ca,fr -option caps:escape && xmodmap ~/.Xmodmap
+fi
