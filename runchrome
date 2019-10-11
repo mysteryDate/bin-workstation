@@ -46,9 +46,8 @@ function ene() {
   # --enable-accelerated-2d-canvas \
   # --enable-experimental-web-platform-features \
   # --disable-accelerated-2d-canvas \
-  # --use-gl=swiftshader \
   # --disable-features=CanvasAlwaysDeferral \
-  # --user-data-dir=../profiles/${FLAGS_profile}/ \
+  # --use-gl=swiftshader \
 
 ene out/${TARGET_DIR}/chrome \
   --enable-logging=stderr \
@@ -57,4 +56,5 @@ ene out/${TARGET_DIR}/chrome \
   --enable-precise-memory-info \
   --js-flags="--expose-gc" \
   --vmodule="${VMODULES_STRING}" \
+  --user-data-dir=../profiles/${FLAGS_profile}/ \
   ${GBASH_ARGV[@]}
