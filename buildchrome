@@ -11,6 +11,7 @@ cmd="autoninja -C ~/chrome/src/out/${FLAGS_d}"
 if !(( FLAGS_t )); then
   cmd="${cmd} chrome"
 fi
+echo $cmd
 if $cmd; then
   chime
   if (( FLAGS_r )); then

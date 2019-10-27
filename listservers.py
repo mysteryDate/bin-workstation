@@ -17,10 +17,13 @@ def get_servers():
       print(x, p, f)
       continue
     p = p.split("-p\x00")[1].split("\x00")[0]
-    f = f.split("aaronhk/")[1].rstrip("\n")
+    f = f.split(": ")[1].rstrip("\n")
+    f = f.replace("/usr/local/google/home/aaronhk", "")
     f = f.replace("chrome/src/third_party/blink", "BLINK")
     f = f.replace("chrome/src/third_party", "THIRD_PARTY")
     f = f.replace("chrome/src", "CS")
+    if (f == ""):
+      f = "~"
     result.append((int(p), f))
 
   result.sort(key=lambda x:x[0])

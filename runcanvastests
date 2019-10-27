@@ -2,7 +2,6 @@
 source $GBASH_ROOT/gbash.sh || exit 1
 
 DEFINE_bool a "false" "Run all tests"
-DEFINE_bool v "false" "Run virtual tests"
 
 declare -a TEST_FOLDERS=(
     http/tests/canvas
@@ -25,7 +24,7 @@ for i in "${TEST_FOLDERS[@]}"; do
   printf "^ $i\n------------------------------------\n\n"
 done
 
-if (( FLAGS_v )); then
+if (( FLAGS_a )); then
   for i in "${VIRTUAL_TEST_FOLDERS[@]}"; do
     third_party/blink/tools/run_web_tests.py $i -q --no-show-results
     printf "^ $i\n------------------------------------\n\n"
