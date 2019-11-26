@@ -22,6 +22,7 @@ def get_servers():
     f = f.replace("chrome/src/third_party/blink", "BLINK")
     f = f.replace("chrome/src/third_party", "THIRD_PARTY")
     f = f.replace("chrome/src", "CS")
+    f = f.replace("/src/github.com", "GITHUB")
     if (f == ""):
       f = "~"
     result.append((int(p), f))
