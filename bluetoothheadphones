@@ -1,9 +1,12 @@
 #!/bin/bash
 
 bluetoothctl disconnect
+pactl unload-module module-bluetooth-discover
+pactl load-module module-bluetooth-discover
 if bluetoothctl connect CC:98:8B:B1:AC:64; then
   sleep 3s
-  setxkbmap -option caps:escape
-  xmodmap ~/.Xmodmap
+  # Don't need this with ergodox
+  # setxkbmap -option caps:escape
+  # xmodmap ~/.Xmodmap
   chime && chime
 fi
