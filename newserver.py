@@ -14,8 +14,9 @@ occupied_ports = []
 for pid in PIDs:
   proc = command_to_string(["cat", "/proc/{}/cmdline".format(pid)])
   proc = proc.replace("\x00", " ")
-  port_number = re.findall(r"\d{3,8}", proc)[0]
-  occupied_ports.append(int(port_number))
+  if re.findall(r"\d{3,8}", proc):
+    port_number = re.findall(r"\d{3,8}", proc)[0]
+    occupied_ports.append(int(port_number))
 if len(occupied_ports) == 0:
   occupied_ports.append(STARTING_PORT - 1)
 
