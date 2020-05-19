@@ -48,6 +48,7 @@ function ene() {
   # --disable-accelerated-2d-canvas \
   # --disable-features=CanvasAlwaysDeferral \
   # --use-gl=swiftshader \
+  # --new-canvas-2d-api \
 
 ene out/${TARGET_DIR}/chrome \
   --enable-logging=stderr \
