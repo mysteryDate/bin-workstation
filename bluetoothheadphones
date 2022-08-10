@@ -6,7 +6,7 @@ pactl load-module module-bluetooth-discover
 if bluetoothctl connect CC:98:8B:B1:AC:64; then
   sleep 3s
   # Don't need this with ergodox
-  # setxkbmap -option caps:escape
+  setxkbmap -option caps:escape
   # xmodmap ~/.Xmodmap
   chime && chime
 fi

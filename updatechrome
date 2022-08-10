@@ -1,16 +1,11 @@
 #!/bin/bash
 
 cd ~/chrome/src
-if git rebase-update; then
-  if gclient sync -D --jobs=256; then
-    if autoninja -C ~/chrome/src/out/Release; then
-      chime
-    else
-      sadchime
-    fi
-  else
-    sadchime
-  fi
+if git rebase-update && gclient sync -D --jobs=256 && \
+    autoninja -C ~/chrome/src/out/Release && \
+    tools/clang/scripts/generate_compdb.py -p out/Release > compile_commands.json
+then
+  chime
 else
   sadchime
 fi

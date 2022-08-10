@@ -22,7 +22,7 @@ for i in ${VMODULES[@]}; do
   VMODULES_STRING="${VMODULES_STRING}$i=3,"
 done
 
-COMMON_ANCESTOR=$(git merge-base HEAD origin/master)
+COMMON_ANCESTOR=$(git merge-base HEAD origin/main)
 function auto_vmodules() {
   for l in `git diff --name-only $COMMON_ANCESTOR | egrep "\.(cc|h)$"`; do
     echo `basename ${l%.*}`
@@ -43,17 +43,20 @@ function ene() {
   # --force-device-scale-factor=0.5 \
   # --ensure-forced-color-profile \
   # --use-gl=angle --use-angle=gl --use-cmd-decoder=passthrough \
-  # --enable-accelerated-2d-canvas \
-  # --enable-experimental-web-platform-features \
+  # --enable-blink-features=CanvasColorManagement \
+  # --force-gpu-rasterization \
   # --disable-accelerated-2d-canvas \
-  # --disable-features=CanvasAlwaysDeferral \
+  # --disable-gpu-compositing \
   # --use-gl=swiftshader \
   # --new-canvas-2d-api \
+  # --enable-blink-features=CSSColorTypedOM \
+  # --use-angle=swiftshader \
+  # --enable-features=Vulkan,VulkanFromANGLE \
+  # --disable-features=Canvas2dStaysGPUOnReadback \
 
 ene out/${TARGET_DIR}/chrome \
   --enable-logging=stderr \
-  --force-gpu-rasterization \
-  --enable-experimental-canvas-features \
+  --enable-experimental-web-platform-features \
   --enable-precise-memory-info \
   --js-flags="--expose-gc" \
   --vmodule="${VMODULES_STRING}" \

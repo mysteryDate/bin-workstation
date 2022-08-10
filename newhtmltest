@@ -1,0 +1,3 @@
+#!/bin/bash
+cp "${HOME}/Documents/test_files/basic-canvas.html" "${HOME}/Desktop/${1}.html"
+code "${HOME}/Desktop/${1}.html"

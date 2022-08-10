@@ -4,11 +4,10 @@ source $GBASH_ROOT/gbash.sh || exit 1
 DEFINE_bool a "false" "Run all tests"
 
 declare -a TEST_FOLDERS=(
-    http/tests/canvas
+    # http/tests/canvas
     svg/canvas
     fast/canvas
-    external/wpt/offscreen-canvas
-    external/wpt/2dcontext
+    external/wpt/html/canvas
   )
 
 declare -a VIRTUAL_TEST_FOLDERS=(
@@ -48,3 +47,5 @@ if (( FLAGS_a )); then
     --passthrough --no-skia-gold-failure --test-filter *anvas*
   printf "^ $i\n------------------------------------\n\n"
 fi
+
+chime

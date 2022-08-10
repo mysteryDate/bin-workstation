@@ -7,6 +7,8 @@ DEFINE_bool t "false" "Build tests"
 DEFINE_string d "Release" "Which output directory to use"
 gbash::init_google "$@"
 
+clear
+
 cmd="autoninja -C ~/chrome/src/out/${FLAGS_d}"
 if !(( FLAGS_t )); then
   cmd="${cmd} chrome"
@@ -15,7 +17,7 @@ echo $cmd
 if $cmd; then
   chime
   if (( FLAGS_r )); then
-    rchrome -d=${FLAGS_d} ${GBASH_ARGV[@]}
+    runchrome -d=${FLAGS_d} ${GBASH_ARGV[@]}
   fi
 else
   sadchime

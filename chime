@@ -1,2 +1,6 @@
 #!/bin/bash
-play -nq -t alsa synth 0.15 tri C4 tri E4 tri G4 delay 0 0.15 0.3 remix - vol 1 reverb
+# play -nq -t alsa synth 0.15 tri C4 tri E4 tri G4 delay 0 0.15 0.3 remix - vol 1 reverb
+EMOJI=("💃" "🕺" "👯‍♀️" "😎" "🍾" "🎊" "🥳" "🍕" "🌶" "🤠" "💖" "🥰" "😍" "😺")
+R=$(($RANDOM % ${#EMOJI[@]}))
+
+pingme ${EMOJI[R]}
