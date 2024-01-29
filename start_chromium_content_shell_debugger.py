@@ -56,7 +56,7 @@ def focus_vscode():
     if PID != active_window_PID:
       subprocess.run(['xdotool', 'windowactivate', str(PID)])
 
-def execute_and_capture_stderr(command):
+def execute_and_capture_stderr(command, remote):
   """Executes a Unix command and captures stderr output in real-time.
 
   Args:
@@ -73,7 +73,7 @@ def execute_and_capture_stderr(command):
   )
 
   # Handle Ctrl+C (SIGINT)
-  def signal_handler(sig, frame):
+  def signal_handler():
     print("Interrupt received, terminating the process...")
     os.killpg(os.getpgid(process.pid), signal.SIGTERM)  # Kill the process group
     sys.exit(0)
@@ -96,10 +96,11 @@ def execute_and_capture_stderr(command):
         if (PID_counter == 2):
           print("replacing processId in {} with: {}".format(launch_filepath, PID))
           modify_line_in_file(launch_filepath, match_pattern, str(PID))
-          # Start the debugger
-          print("Sending F5 to vscode to start debugger")
-          focus_vscode()
-          subprocess.run(['xdotool', 'key', 'F5'])
+          if not remote:
+            # Start the debugger
+            print("Sending F5 to vscode to start debugger")
+            focus_vscode()
+            subprocess.run(['xdotool', 'key', 'F5'])
 
   stderr_thread = threading.Thread(target=read_stderr)
   stderr_thread.start()
@@ -110,8 +111,8 @@ def execute_and_capture_stderr(command):
 def main():
   parser = argparse.ArgumentParser()
 
-  parser.add_argument("--remote", type=bool, required=False, default=False,
-            help="Is this a remote session?")
+  parser.add_argument("--remote", action='store_true',
+                      help="Is this a remote session?")
 
   parser.add_argument("site", help="The website to load.", default="", nargs='?')
 
@@ -120,11 +121,11 @@ def main():
   os.chdir(os.path.join(os.path.expanduser("~"), "chrome", "src"))
 
   command = "{} out/Debug/content_shell --no-sandbox --renderer-startup-dialog \
-    --enable-experimental-web-platform-features {}".format(
-      "DISPLAY=\":20\"" if args.remote else "",
-      args.site
-      )
-  execute_and_capture_stderr(command)
+      --enable-experimental-web-platform-features {}".format(
+        "DISPLAY=\":20\"" if args.remote else "", args.site)
+
+  print("Executing command:\n{}".format(command))
+  execute_and_capture_stderr(command, args.remote)
 
 if __name__ == "__main__":
   main()
