@@ -97,7 +97,6 @@ def execute_and_capture_stderr(command):
           print("replacing processId in {} with: {}".format(launch_filepath, PID))
           modify_line_in_file(launch_filepath, match_pattern, str(PID))
           # Start the debugger
-          time.sleep(1)
           print("Sending F5 to vscode to start debugger")
           focus_vscode()
           subprocess.run(['xdotool', 'key', 'F5'])
