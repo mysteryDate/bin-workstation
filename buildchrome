@@ -9,9 +9,9 @@ gbash::init_google "$@"
 
 clear
 
-cmd="autoninja -C ~/chrome/src/out/${FLAGS_d}"
+cmd="autoninja -C ${HOME}/chrome/src/out/${FLAGS_d}"
 if !(( FLAGS_t )); then
-  cmd="${cmd} chrome"
+  cmd="${cmd} content_shell chrome"
 fi
 echo $cmd
 if $cmd; then

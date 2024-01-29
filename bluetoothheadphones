@@ -3,7 +3,7 @@
 bluetoothctl disconnect
 pactl unload-module module-bluetooth-discover
 pactl load-module module-bluetooth-discover
-if bluetoothctl connect CC:98:8B:B1:AC:64; then
+if bluetoothctl connect 88:C9:E8:52:BA:0C; then
   sleep 3s
   # Don't need this with ergodox
   setxkbmap -option caps:escape

@@ -42,23 +42,30 @@ function ene() {
   # --force-color-profile=srgb \
   # --force-device-scale-factor=0.5 \
   # --ensure-forced-color-profile \
-  # --use-gl=angle --use-angle=gl --use-cmd-decoder=passthrough \
   # --enable-blink-features=CanvasColorManagement \
   # --force-gpu-rasterization \
+  # --force-high-contrast \
   # --disable-accelerated-2d-canvas \
+  # --use-gl=angle --use-angle=gl --use-cmd-decoder=passthrough \
   # --disable-gpu-compositing \
-  # --use-gl=swiftshader \
   # --new-canvas-2d-api \
   # --enable-blink-features=CSSColorTypedOM \
-  # --use-angle=swiftshader \
   # --enable-features=Vulkan,VulkanFromANGLE \
   # --disable-features=Canvas2dStaysGPUOnReadback \
+  # --use-gl=eglgl \
+  # --user-data-dir=../profiles/${FLAGS_profile}/ \
+  # --enable-gpu-rasterization \
+  # --use-vulkan=swiftshader \
+  # --disable-vulkan-fallback-to-gl-for-testing \
+  # --use-gl=swiftshader \
+  # --use-angle=swiftshader \
+  # --single-process \
 
 ene out/${TARGET_DIR}/chrome \
-  --enable-logging=stderr \
   --enable-experimental-web-platform-features \
+  --enable-logging=stderr \
   --enable-precise-memory-info \
   --js-flags="--expose-gc" \
   --vmodule="${VMODULES_STRING}" \
-  --user-data-dir=../profiles/${FLAGS_profile}/ \
+  --user-data-dir=../profiles/0/ \
   ${GBASH_ARGV[@]}

@@ -1,0 +1,7 @@
+#!/bin/bash
+cd $HOME/Desktop
+python3 $HOME/bin/newserver.py
+cd $HOME/chrome/src/third_party/blink/web_tests
+python3 $HOME/bin/newserver.py
+cd $HOME/chrome/src/third_party/blink/web_tests/external/wpt
+python3 $HOME/bin/newserver.py
