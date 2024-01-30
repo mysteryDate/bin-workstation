@@ -73,7 +73,7 @@ def execute_and_capture_stderr(command, remote):
   )
 
   # Handle Ctrl+C (SIGINT)
-  def signal_handler():
+  def signal_handler(sig, frame):
     print("Interrupt received, terminating the process...")
     os.killpg(os.getpgid(process.pid), signal.SIGTERM)  # Kill the process group
     sys.exit(0)
